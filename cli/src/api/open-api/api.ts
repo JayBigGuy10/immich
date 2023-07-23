@@ -2530,6 +2530,12 @@ export interface SystemConfigFFmpegDto {
     'maxBitrate': string;
     /**
      * 
+     * @type {ToneMapping}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'tonemap': ToneMapping;
+    /**
+     * 
      * @type {string}
      * @memberof SystemConfigFFmpegDto
      */
@@ -2862,6 +2868,22 @@ export const TimeGroupEnum = {
 } as const;
 
 export type TimeGroupEnum = typeof TimeGroupEnum[keyof typeof TimeGroupEnum];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const ToneMapping = {
+    Hable: 'hable',
+    Mobius: 'mobius',
+    Reinhard: 'reinhard',
+    Disabled: 'disabled'
+} as const;
+
+export type ToneMapping = typeof ToneMapping[keyof typeof ToneMapping];
 
 
 /**

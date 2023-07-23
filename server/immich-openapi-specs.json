@@ -6556,6 +6556,9 @@
           "maxBitrate": {
             "type": "string"
           },
+          "tonemap": {
+            "$ref": "#/components/schemas/ToneMapping"
+          },
           "preset": {
             "type": "string"
           },
@@ -6585,6 +6588,7 @@
           "targetAudioCodec",
           "transcode",
           "accel",
+          "tonemap",
           "preset",
           "targetResolution",
           "maxBitrate",
@@ -6812,6 +6816,15 @@
           "month"
         ],
         "type": "string"
+      },
+      "ToneMapping": {
+        "type": "string",
+        "enum": [
+          "hable",
+          "mobius",
+          "reinhard",
+          "disabled"
+        ]
       },
       "TranscodeHWAccel": {
         "enum": [
