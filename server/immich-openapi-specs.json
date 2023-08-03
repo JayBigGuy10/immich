@@ -745,15 +745,6 @@
             }
           },
           {
-            "name": "withoutThumbs",
-            "required": false,
-            "in": "query",
-            "description": "Include assets without thumbnails",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "name": "skip",
             "required": false,
             "in": "query",
@@ -5571,10 +5562,6 @@
           "userId": {
             "format": "uuid",
             "type": "string"
-          },
-          "withoutThumbs": {
-            "description": "Include assets without thumbnails",
-            "type": "boolean"
           }
         },
         "required": [
@@ -5590,10 +5577,6 @@
           "userId": {
             "format": "uuid",
             "type": "string"
-          },
-          "withoutThumbs": {
-            "description": "Include assets without thumbnails",
-            "type": "boolean"
           }
         },
         "required": [

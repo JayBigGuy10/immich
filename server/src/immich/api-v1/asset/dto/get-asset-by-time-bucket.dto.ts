@@ -1,7 +1,5 @@
-import { toBoolean } from '@app/domain';
 import { ApiProperty } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsBoolean, IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 
 export class GetAssetByTimeBucketDto {
   @IsNotEmpty()
@@ -17,12 +15,4 @@ export class GetAssetByTimeBucketDto {
   @IsUUID('4')
   @ApiProperty({ format: 'uuid' })
   userId?: string;
-
-  /**
-   * Include assets without thumbnails
-   */
-  @IsOptional()
-  @IsBoolean()
-  @Transform(toBoolean)
-  withoutThumbs?: boolean;
 }

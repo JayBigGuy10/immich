@@ -1,7 +1,6 @@
 import { AssetEntity, ExifEntity } from '@app/infra/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Not } from 'typeorm';
 import { In } from 'typeorm/find-options/operator/In';
 import { Repository } from 'typeorm/repository/Repository';
 import { AssetSearchDto } from './dto/asset-search.dto';
@@ -53,8 +52,7 @@ export class AssetRepository implements IAssetRepository {
   ) {}
 
   async getAssetByTimeBucket(userId: string, dto: GetAssetByTimeBucketDto): Promise<AssetEntity[]> {
-    // Get asset entity from a list of time buckets
-    let builder = this.assetRepository
+    return this.assetRepository
       .createQueryBuilder('asset')
       .leftJoinAndSelect('asset.exifInfo', 'exifInfo')
       .where('asset.ownerId = :userId', { userId: userId })
@@ -63,13 +61,8 @@ export class AssetRepository implements IAssetRepository {
       })
       .andWhere('asset.isVisible = true')
       .andWhere('asset.isArchived = false')
-      .orderBy('asset.fileCreatedAt', 'DESC');
-
-    if (!dto.withoutThumbs) {
-      builder = builder.andWhere('asset.resizePath is not NULL');
-    }
-
-    return builder.getMany();
+      .orderBy('asset.fileCreatedAt', 'DESC')
+      .getMany();
   }
 
   async getAssetCountByTimeBucket(
@@ -94,10 +87,6 @@ export class AssetRepository implements IAssetRepository {
         .addSelect(`date_trunc('day', "fileCreatedAt")`, 'timeBucket')
         .groupBy(`date_trunc('day', "fileCreatedAt")`)
         .orderBy(`date_trunc('day', "fileCreatedAt")`, 'DESC');
-    }
-
-    if (!dto.withoutThumbs) {
-      builder.andWhere('asset.resizePath is not NULL');
     }
 
     return builder.getRawMany();
@@ -183,7 +172,6 @@ export class AssetRepository implements IAssetRepository {
     return this.assetRepository.find({
       where: {
         ownerId,
-        resizePath: dto.withoutThumbs ? undefined : Not(IsNull()),
         isVisible: true,
         isFavorite: dto.isFavorite,
         isArchived: dto.isArchived,

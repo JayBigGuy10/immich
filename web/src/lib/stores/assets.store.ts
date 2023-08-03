@@ -52,7 +52,7 @@ export class AssetStore {
 
   async init(viewport: Viewport) {
     const { data } = await api.assetApi.getAssetCountByTimeBucket({
-      getAssetCountByTimeBucketDto: { ...this.options, withoutThumbs: true },
+      getAssetCountByTimeBucketDto: this.options,
     });
 
     this.buckets = data.buckets.map((bucket) => {
@@ -106,7 +106,6 @@ export class AssetStore {
           getAssetByTimeBucketDto: {
             timeBucket: [bucketDate],
             ...this.options,
-            withoutThumbs: true,
           },
         },
         { signal: bucket.cancelToken.signal },
