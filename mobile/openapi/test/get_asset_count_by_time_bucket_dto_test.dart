@@ -26,12 +26,6 @@ void main() {
       // TODO
     });
 
-    // Include assets without thumbnails
-    // bool withoutThumbs
-    test('to test the property `withoutThumbs`', () async {
-      // TODO
-    });
-
 
   });
 

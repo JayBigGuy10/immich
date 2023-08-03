@@ -15,7 +15,6 @@ class GetAssetByTimeBucketDto {
   GetAssetByTimeBucketDto({
     this.timeBucket = const [],
     this.userId,
-    this.withoutThumbs,
   });
 
   List<String> timeBucket;
@@ -28,30 +27,19 @@ class GetAssetByTimeBucketDto {
   ///
   String? userId;
 
-  /// Include assets without thumbnails
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  bool? withoutThumbs;
-
   @override
   bool operator ==(Object other) => identical(this, other) || other is GetAssetByTimeBucketDto &&
      other.timeBucket == timeBucket &&
-     other.userId == userId &&
-     other.withoutThumbs == withoutThumbs;
+     other.userId == userId;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
     (timeBucket.hashCode) +
-    (userId == null ? 0 : userId!.hashCode) +
-    (withoutThumbs == null ? 0 : withoutThumbs!.hashCode);
+    (userId == null ? 0 : userId!.hashCode);
 
   @override
-  String toString() => 'GetAssetByTimeBucketDto[timeBucket=$timeBucket, userId=$userId, withoutThumbs=$withoutThumbs]';
+  String toString() => 'GetAssetByTimeBucketDto[timeBucket=$timeBucket, userId=$userId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -60,11 +48,6 @@ class GetAssetByTimeBucketDto {
       json[r'userId'] = this.userId;
     } else {
     //  json[r'userId'] = null;
-    }
-    if (this.withoutThumbs != null) {
-      json[r'withoutThumbs'] = this.withoutThumbs;
-    } else {
-    //  json[r'withoutThumbs'] = null;
     }
     return json;
   }
@@ -81,7 +64,6 @@ class GetAssetByTimeBucketDto {
             ? (json[r'timeBucket'] as Iterable).cast<String>().toList(growable: false)
             : const [],
         userId: mapValueOfType<String>(json, r'userId'),
-        withoutThumbs: mapValueOfType<bool>(json, r'withoutThumbs'),
       );
     }
     return null;

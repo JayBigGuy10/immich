@@ -15,7 +15,6 @@ class GetAssetCountByTimeBucketDto {
   GetAssetCountByTimeBucketDto({
     required this.timeGroup,
     this.userId,
-    this.withoutThumbs,
   });
 
   TimeGroupEnum timeGroup;
@@ -28,30 +27,19 @@ class GetAssetCountByTimeBucketDto {
   ///
   String? userId;
 
-  /// Include assets without thumbnails
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  bool? withoutThumbs;
-
   @override
   bool operator ==(Object other) => identical(this, other) || other is GetAssetCountByTimeBucketDto &&
      other.timeGroup == timeGroup &&
-     other.userId == userId &&
-     other.withoutThumbs == withoutThumbs;
+     other.userId == userId;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
     (timeGroup.hashCode) +
-    (userId == null ? 0 : userId!.hashCode) +
-    (withoutThumbs == null ? 0 : withoutThumbs!.hashCode);
+    (userId == null ? 0 : userId!.hashCode);
 
   @override
-  String toString() => 'GetAssetCountByTimeBucketDto[timeGroup=$timeGroup, userId=$userId, withoutThumbs=$withoutThumbs]';
+  String toString() => 'GetAssetCountByTimeBucketDto[timeGroup=$timeGroup, userId=$userId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -60,11 +48,6 @@ class GetAssetCountByTimeBucketDto {
       json[r'userId'] = this.userId;
     } else {
     //  json[r'userId'] = null;
-    }
-    if (this.withoutThumbs != null) {
-      json[r'withoutThumbs'] = this.withoutThumbs;
-    } else {
-    //  json[r'withoutThumbs'] = null;
     }
     return json;
   }
@@ -79,7 +62,6 @@ class GetAssetCountByTimeBucketDto {
       return GetAssetCountByTimeBucketDto(
         timeGroup: TimeGroupEnum.fromJson(json[r'timeGroup'])!,
         userId: mapValueOfType<String>(json, r'userId'),
-        withoutThumbs: mapValueOfType<bool>(json, r'withoutThumbs'),
       );
     }
     return null;
